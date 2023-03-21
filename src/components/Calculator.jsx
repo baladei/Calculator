@@ -4,9 +4,48 @@ import '../styles/calculator.css'
 export const Calculator = () => {
 
   const [num, setNum] = useState(0)
+  const [oldnum, setOldNum] = useState(0)
+  const [operator, setOperator] = useState()
 
   function getNum (e) {
-    setNum(e.target.value)
+    if(num === 0) {
+      setNum(e.target.value)
+    } else {
+      setNum(num + e.target.value)
+    }
+  }
+  function operatorHandler (e) {
+    setOperator(e.target.value)
+    setOldNum(num)
+    setNum(0)
+  }
+
+  function calculate () {
+    if(operator === '+') {
+      setNum(parseFloat(oldnum) + parseFloat(num))
+    } else if (operator === '-') {
+      setNum(oldnum - num)
+    } else if (operator === 'x') {
+      setNum(oldnum * num)
+    } else if (operator === '/') {
+      setNum(oldnum / num)
+    } 
+  }
+
+  function reset () {
+    setNum(0)
+  }
+
+  function percentage () {
+    setNum(num / 100)
+  }
+
+  function changeOperator () {
+    if(num > 0) {
+      setNum(-num)
+    } else {
+      setNum(-num)
+    }
   }
 
   return (
@@ -16,25 +55,25 @@ export const Calculator = () => {
       <h1 className='result'>{num}</h1>
 
       <div className="numbers">
-        <button className='white' onClick={getNum} value={0}>AC</button>
-        <button className='white'>+/-</button>
-        <button className='white'>%</button>
-        <button className='orange'>/</button>
+        <button className='white' onClick={reset}>AC</button>
+        <button onClick={changeOperator} className='white'>+/-</button>
+        <button onClick={percentage}className='white'>%</button>
+        <button onClick={operatorHandler} value='/' className='orange'>/</button>
         <button onClick={getNum} value={7}>7</button>
         <button onClick={getNum} value={8}>8</button>
         <button onClick={getNum} value={9}>9</button>
-        <button className='orange'>X</button>
+        <button onClick={operatorHandler} value='x' className='orange'>x</button>
         <button onClick={getNum} value={4}>4</button>
         <button onClick={getNum} value={5}>5</button>
         <button onClick={getNum} value={6}>6</button>
-        <button className='orange'>-</button>
+        <button onClick={operatorHandler} value='-' className='orange'>-</button>
         <button onClick={getNum} value={1}>1</button>
         <button onClick={getNum} value={2}>2</button>
         <button onClick={getNum} value={3}>3</button>
-        <button className='orange'>+</button>
+        <button onClick={operatorHandler} value='+' className='orange'>+</button>
         <button onClick={getNum} value={0} className='zero'>0</button>
-        <button>,</button>
-        <button>=</button>
+        <button onClick={getNum} value={"."}>,</button>
+        <button onClick={calculate} className='orange'>=</button>
       </div>
 
     </div>

@@ -43,4 +43,6 @@ button {
 .zero {
     width: 6.4em;
     height: 2.85em;
+    text-align: start;
+    padding-left: 2rem;
 }
