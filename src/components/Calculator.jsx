@@ -10,10 +10,13 @@ export const Calculator = () => {
   function getNum (e) {
     if(num === 0) {
       setNum(e.target.value)
+    } else if (num.startsWith(".") || num.startsWith(0)) {
+      setNum(num)
     } else {
       setNum(num + e.target.value)
     }
   }
+  
   function operatorHandler (e) {
     setOperator(e.target.value)
     setOldNum(num)
