@@ -11,15 +11,16 @@ export const Calculator = () => {
     if(num === 0) {
       setNum(e.target.value)
     } else if (num.startsWith(".") || num.startsWith(0)) {
-      setNum(num)    
-    } else { 
-      if (e.target.value === '.' && num.includes('.')) {
-        setNum(num)
-      } else {
-        setNum(num + e.target.value)
-      }
-     
-    }
+      setNum(0)    
+    } else if (e.target.value === '.' && num.includes('.')) {
+      setNum(num)
+    } else if (num.length >= 12) {
+      setNum("Error")
+    } else if (num === "Error") {
+      setNum(reset)
+    } else {
+      setNum(num + e.target.value)
+    }  
   }
   
   function operatorHandler (e) {
